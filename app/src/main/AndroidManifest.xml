@@ -10,15 +10,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeWidget">
         <activity
-            android:name=".MainActivity"
+            android:name=".ListActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.ComposeWidget">
+            android:label="@string/title_activity_list"
+            android:theme="@style/Theme.ComposeWidget" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ButtonActivity"
+            android:exported="true"
+            android:label="@string/title_activity_button"
+            android:theme="@style/Theme.ComposeWidget">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ComposeWidget">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
     </application>
 

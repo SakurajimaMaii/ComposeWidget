@@ -1,11 +1,10 @@
 package com.example.composewidget
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.IdRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -28,12 +27,13 @@ import kotlin.math.roundToInt
 fun ScrollableAppBar(
     modifier: Modifier = Modifier,
     title: String = stringResource(id = R.string.app_name), //默认为应用名
-    navigationIcon: @Composable (() -> Unit) =
-        { Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "ArrowBack",tint = Color.White) }, //默认为返回键
-    @DrawableRes backgroundImageId:Int, // 背景图片
-    background: Color = MaterialTheme.colors.primary,
-    scrollableAppBarHeight: Dp, //ScrollableAppBar高度
-    toolbarOffsetHeightPx:MutableState<Float> //向上偏移量
+    navigationIcon: @Composable () -> Unit =
+        {
+            Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "ArrowBack", tint = Color.White)
+        }, //默认为返回键
+    @DrawableRes backgroundImageId: Int, // 背景图片
+    scrollableAppBarHeight: Dp,
+    toolbarOffsetHeightPx: MutableState<Float> //向上偏移量
 ) {
 
     // 应用栏最大向上偏移量
@@ -82,7 +82,11 @@ fun ScrollableAppBar(
                 },
             contentAlignment = Alignment.CenterStart
         ) {
-            Text(text = title,color = Color.White,modifier = Modifier.padding(start = 20.dp),fontSize = 20.sp)
+            Text(text = title,
+                color = Color.White,
+                modifier = Modifier.padding(start = 20.dp).matchParentSize(), // 使用 matchParentSize 修饰符保证不影响父 Box尺寸
+                fontSize = 20.sp
+            )
         }
     }
 }

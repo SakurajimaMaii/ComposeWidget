@@ -5,10 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,10 +16,8 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.composewidget.ui.theme.ComposeWidgetTheme
-import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +29,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    val toolbarHeight = 200.dp
                     // ToolBar 最大向上位移量
                     // 56.dp 参考自 androidx.compose.material AppBar.kt 里面定义的 private val AppBarHeight = 56.dp
-                    val maxUpPx = with(LocalDensity.current) { 200.dp.roundToPx().toFloat() - 56.dp.roundToPx().toFloat() }
+                    val maxUpPx = with(LocalDensity.current) { toolbarHeight.roundToPx().toFloat() - 56.dp.roundToPx().toFloat() }
                     // ToolBar 最小向上位移量
                     val minUpPx = 0f
                     // 偏移折叠工具栏上移高度
@@ -63,17 +59,27 @@ class MainActivity : ComponentActivity() {
                             .nestedScroll(nestedScrollConnection)
                     ) {
                         // our list with build in nested scroll support that will notify us about its scroll
-                        LazyColumn(contentPadding = PaddingValues(top = 200.dp)) {
+                        LazyColumn(contentPadding = PaddingValues(top = toolbarHeight)) {
                             items(100) { index ->
-                                Text("I'm item $index", modifier = Modifier.fillMaxWidth().padding(16.dp))
+                                Text("I'm item $index", modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp))
                             }
                         }
                         ScrollableAppBar(
                             title = "toolbar offset is ${toolbarOffsetHeightPx.value}",
-                            scrollableAppBarHeight = 200.dp,
-                            toolbarOffsetHeightPx = toolbarOffsetHeightPx,
-                            backgroundImageId = R.drawable.top_bar_bk
+                            backgroundImageId = R.drawable.top_bar_bk,
+                            scrollableAppBarHeight = toolbarHeight,
+                            toolbarOffsetHeightPx = toolbarOffsetHeightPx
                         )
+                    }
+                    
+                    Button(onClick = {  }) {
+                        
+                    }
+                    
+                    TextButton(onClick = { /*TODO*/ }) {
+                        
                     }
                 }
             }
